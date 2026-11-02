@@ -21,4 +21,13 @@ bash scripts/run_all.sh                  # all experiments -> results/
 
 `results/logs/commands.log` lists every command run; each `results/<exp>/` has `metrics.json`, `env.json` (GPU, versions, argv), `report.md`, and per-image predicted/GT boxes.
 
+Report: `report/report.pdf` (source `report/report.md`). Regenerate tables, figures and the PDF:
+
+```bash
+uv run scripts/analyze.py                                         # report/tables.md + report/figures/
+uv run --with markdown --with weasyprint scripts/build_report.py  # report/report.pdf
+```
+
+Per-image box files (`results/**/boxes_*.jsonl.gz`, ~118 MB) are not committed; `run_all.sh` regenerates them. The failure figure also needs five KITTI frames in `data/kitti_figs/` (chosen by `scripts/pick_failures.py`).
+
 Evaluation protocol and its deviations from the tutorial defaults: `docs/adr/`.
