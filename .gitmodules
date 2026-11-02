@@ -1,0 +1,4 @@
+[submodule "external/DeepDataMiningLearning"]
+	path = external/DeepDataMiningLearning
+	url = https://github.com/lkk688/DeepDataMiningLearning.git
+	shallow = true
