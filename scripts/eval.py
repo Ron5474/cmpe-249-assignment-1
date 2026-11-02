@@ -4,8 +4,10 @@ Mirrors ngdet.run_eval.evaluate_one, plus three things the harness lacks:
   * a `coco80` taxonomy (identity over the 80 COCO names) for the reproduction check
   * a `driving3_bare` taxonomy (driving3 with bare class-name prompts) for the
     open-vocab prompt ablation
-  * per-image boxes (top 100 by score) + GT saved for failure analysis, and
-    peak GPU memory / wall-clock throughput per run
+  * every per-image prediction (unrounded) + GT saved for failure analysis and
+    rescoring, and peak GPU memory / wall-clock throughput per run
+Detectors are built through scripts/detectors.py, which corrects Faster R-CNN's
+internal score floor and Grounding DINO's phrase -> class mapping.
 
 Usage (see scripts/run_all.sh for the exact commands used in the report):
   uv run scripts/eval.py --exp driving3 --taxonomy driving3 \
@@ -18,6 +20,7 @@ import gzip
 import json
 import os
 import platform
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -30,14 +33,14 @@ import torch  # noqa: E402
 
 from DeepDataMiningLearning.ngdet import taxonomy as ngtax  # noqa: E402
 from DeepDataMiningLearning.ngdet.datasets import EvalDataset  # noqa: E402
-from DeepDataMiningLearning.ngdet.detectors.base import build_detector  # noqa: E402
 from DeepDataMiningLearning.ngdet.evaluator import COCOUnifiedEvaluator  # noqa: E402
 from DeepDataMiningLearning.ngdet.report import plot_heatmap, write_markdown_report  # noqa: E402
+
+from detectors import build  # noqa: E402
 
 DATA_ROOT = Path(os.environ.get("DATA_ROOT", REPO / "data"))
 COCO_ANN = DATA_ROOT / "coco/annotations/instances_val2017.json"
 ROOTS = {"coco": DATA_ROOT / "coco/val2017", "kitti": DATA_ROOT / "kitti"}
-TOP_K_SAVED = 100  # matches COCOeval maxDets=100
 
 
 def make_taxonomy(name: str) -> ngtax.Taxonomy:
@@ -52,6 +55,18 @@ def make_taxonomy(name: str) -> ngtax.Taxonomy:
     return ngtax.Taxonomy.from_preset(name)
 
 
+def code_version() -> str:
+    run = lambda *a: subprocess.run(["git", "-C", str(REPO), *a], capture_output=True, text=True).stdout.strip()
+    return run("rev-parse", "--short", "HEAD") + ("-dirty" if run("status", "--porcelain", "scripts") else "")
+
+
+RUN_INFO = {
+    "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
+    "code_version": code_version(),
+    "run_started": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+}
+
+
 def evaluate_one(spec: str, ds_name: str, tax, score_thr: float, max_images,
                  out_dir: Path) -> dict:
     print(f"\n{'=' * 70}\n[{spec}] x [{ds_name}] taxonomy={tax.name}\n{'=' * 70}", flush=True)
@@ -59,7 +74,7 @@ def evaluate_one(spec: str, ds_name: str, tax, score_thr: float, max_images,
     dataset = EvalDataset(ds_name, str(ROOTS[ds_name]), tax, max_images=max_images, **ds_kwargs)
 
     torch.cuda.reset_peak_memory_stats()
-    detector = build_detector(spec, tax, device="cuda", score_thr=score_thr)
+    detector = build(spec, tax, device="cuda", score_thr=score_thr)
     evaluator = COCOUnifiedEvaluator(tax)
     label = spec.split("@")[0]
     tag = label.replace(":", "_").replace("/", "_")
@@ -75,13 +90,12 @@ def evaluate_one(spec: str, ds_name: str, tax, score_thr: float, max_images,
             torch.cuda.synchronize()
             infer_s += time.perf_counter() - ti
             evaluator.add(sample, det)
-            top = np.argsort(-det.scores)[:TOP_K_SAVED]
             fbox.write(json.dumps({
                 "image_id": int(sample.image_id),
-                "pred_boxes": np.round(det.boxes[top], 1).tolist(),
-                "pred_scores": np.round(det.scores[top], 4).tolist(),
-                "pred_labels": det.labels[top].tolist(),
-                "gt_boxes": np.round(sample.gt_boxes, 1).tolist(),
+                "pred_boxes": np.asarray(det.boxes, np.float64).tolist(),
+                "pred_scores": np.asarray(det.scores, np.float64).tolist(),
+                "pred_labels": np.asarray(det.labels).tolist(),
+                "gt_boxes": np.asarray(sample.gt_boxes, np.float64).tolist(),
                 "gt_labels": sample.gt_labels.tolist(),
             }) + "\n")
             if i % 500 == 0:
@@ -97,6 +111,7 @@ def evaluate_one(spec: str, ds_name: str, tax, score_thr: float, max_images,
         "seconds": round(time.time() - t0, 1),
         "mean_predict_ms": round(1000 * infer_s / max(n, 1), 2),
         "peak_gpu_mem_mb": round(torch.cuda.max_memory_allocated() / 2**20, 1),
+        **RUN_INFO,
     }
     del detector
     torch.cuda.empty_cache()
@@ -129,11 +144,12 @@ def main():
             json.dump(all_metrics, open(metrics_path, "w"), indent=2)  # save after every pair
 
     env = {
-        "argv": sys.argv, "gpu": torch.cuda.get_device_name(0),
+        "argv": sys.argv, **RUN_INFO,
         "torch": torch.__version__, "cuda": torch.version.cuda,
         "python": platform.python_version(), "platform": platform.platform(),
     }
-    json.dump(env, open(out_dir / "env.json", "w"), indent=2)
+    # one env file per invocation, so reruns don't overwrite earlier provenance
+    json.dump(env, open(out_dir / f"env_{time.strftime('%Y%m%d-%H%M%S')}.json", "w"), indent=2)
     write_markdown_report(all_metrics, str(out_dir / "report.md"), tax)
     plot_heatmap(all_metrics, str(out_dir / "heatmap_mAP.png"))
     print(f"\nSaved -> {out_dir}")

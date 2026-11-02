@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 # Every experiment in the report, in order. Output + logs go to results/.
-#   bash scripts/run_all.sh                          # report settings
+#   bash scripts/run_all.sh                          # report settings (all images)
 #   REPRO_MAX=20 MAX_IMAGES=20 bash scripts/run_all.sh   # quick smoke test
-# Reproduction check uses all 5000 COCO val images (needed to compare with published mAP).
-# Cross-dataset runs use the first MAX_IMAGES images per dataset (default 2000) to keep
-# Grounding DINO's runtime manageable; 0 = all.
+# Defaults evaluate every image (0 = all), as in the report.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-MAX="${MAX_IMAGES:-2000}"
+MAX="${MAX_IMAGES:-0}"
 REPRO_MAX="${REPRO_MAX:-0}"
 mkdir -p results/logs
 log() { echo "+ $*" | tee -a results/logs/commands.log; "$@" 2>&1 | tee "results/logs/run_$(date +%H%M%S).log"; }

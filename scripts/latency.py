@@ -1,8 +1,9 @@
 """Batch-1 latency, FPS and peak GPU memory per detector and precision.
 
 Times ngdet's full `predict()` (preprocess + forward + postprocess + taxonomy fold)
-on one fixed KITTI frame, after warmup. ngdet.latency has no memory measurement,
-hence this script.
+on one fixed KITTI frame, after warmup, using the same corrected detector
+construction as eval.py (scripts/detectors.py). ngdet.latency has no memory
+measurement, hence this script.
 
   uv run scripts/latency.py --models yolo:yolo11x.pt --accel fp32 fp16
 """
@@ -22,8 +23,10 @@ sys.path.insert(0, str(REPO / "external" / "DeepDataMiningLearning"))
 import torch  # noqa: E402
 from PIL import Image  # noqa: E402
 
-from DeepDataMiningLearning.ngdet.detectors.base import build_detector  # noqa: E402
 from DeepDataMiningLearning.ngdet.taxonomy import Taxonomy  # noqa: E402
+
+from detectors import build  # noqa: E402
+from eval import RUN_INFO  # noqa: E402
 
 DATA_ROOT = Path(os.environ.get("DATA_ROOT", REPO / "data"))
 
@@ -45,7 +48,7 @@ def main():
             torch.cuda.empty_cache()
             torch.cuda.reset_peak_memory_stats()
             try:
-                det = build_detector(spec, tax, device="cuda", score_thr=0.001, accel=accel)
+                det = build(spec, tax, device="cuda", score_thr=0.001, accel=accel)
             except Exception as e:  # unsupported model/precision pair
                 print(f"[skip] {spec} {accel}: {e}")
                 continue
@@ -71,7 +74,7 @@ def main():
 
     out = REPO / "results" / "latency"
     out.mkdir(parents=True, exist_ok=True)
-    json.dump({"gpu": torch.cuda.get_device_name(0), "torch": torch.__version__,
+    json.dump({**RUN_INFO, "torch": torch.__version__,
                "image": a.image, "image_size": image.size, "warmup": a.warmup,
                "iters": a.iters, "rows": rows},
               open(out / "latency.json", "w"), indent=2)

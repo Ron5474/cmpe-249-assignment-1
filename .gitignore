@@ -7,3 +7,4 @@ data/
 results/**/videos/
 results/**/boxes_*.jsonl.gz
 report/tables.md
+.env
