@@ -106,6 +106,34 @@ def tables(repro, d3, bare, lat):
         note = " (adapter ignores fp16)" if r["model"].startswith("gdino") and r["accel"] == "fp16" else ""
         L.append(f"| {MODELS[r['model']][0]} | {r['accel']}{note} | {r['median_ms']} | {r['p90_ms']} | "
                  f"{r['fps']} | {r['peak_gpu_mem_mb']} |")
+    v1 = RES / "v1_original/latency/latency.json"
+    if v1.exists():
+        old = {(r["model"], r["accel"]): r for r in json.load(open(v1))["rows"]}
+        # only models whose detector code did not change between the two runs
+        same_code = ("yolo:yolo11s.pt", "yolo:yolo11x.pt", "hf_detr:PekingU/rtdetr_r50vd", "yolo:yolov8s-worldv2.pt")
+        L.append("\n## Host comparison: same GPU model, different host (fp32 median ms)\n")
+        L.append("| Model | Instance 1 | Instance 2 | Ratio (2 / 1) |")
+        L.append("|---|---|---|---|")
+        for r in lat["rows"]:
+            if r["accel"] == "fp32" and r["model"] in same_code and (r["model"], "fp32") in old:
+                o = old[(r["model"], "fp32")]["median_ms"]
+                L.append(f"| {MODELS[r['model']][0]} | {o} | {r['median_ms']} | {r['median_ms'] / o:.2f}× |")
+
+    for ds in ("coco", "kitti"):
+        f = RES / f"gdino_postprocess/{ds}.json"
+        if f.exists():
+            d = json.load(open(f))
+            L.append(f"\n## Grounding DINO post-processor comparison ({ds.upper()}, first {d['num_images']} images, "
+                     "same forward passes)\n")
+            L.append("| Post-processor | mAP | AR100 | vehicle | person | cyclist |")
+            L.append("|---|---|---|---|---|---|")
+            for n, lbl in (("ngdet_phrase", "ngdet phrase mapping (empty → vehicle)"),
+                           ("phrase_parser", "phrase parser, mixed/empty dropped"),
+                           ("token_scoring", "token-to-class scoring (used)")):
+                m = d[n]
+                pc = m["per_class"]
+                L.append(f"| {lbl} | {pct(m['mAP'])} | {pct(m.get('AR_100', 0))} | {pct(pc['vehicle'])} | "
+                         f"{pct(pc['person'])} | {pct(pc['cyclist'])} |")
     (OUT / "tables.md").write_text("\n".join(L) + "\n")
 
 
@@ -120,13 +148,14 @@ def fig_speed_accuracy(d3, lat):
         ax.scatter([x], [yk], s=64, color=col, edgecolor="white", linewidth=2, zorder=3)
         ax.annotate(name, (x, yc), xytext=(7, 2), textcoords="offset points", fontsize=8.5, color=INK)
     ax.set_xscale("log")
-    ax.set_xticks([5, 10, 20, 50, 100])
-    ax.set_xticklabels(["5", "10", "20", "50", "100"])
+    ax.set_xlim(9, 170)
+    ax.set_xticks([10, 20, 50, 100])
+    ax.set_xticklabels(["10", "20", "50", "100"])
     ax.set_xlabel("Median latency per image, fp32, batch 1 (ms, log scale)", color=MUTED, fontsize=9)
     ax.set_ylabel("mAP@[.5:.95], driving3 (%)", color=MUTED, fontsize=9)
     ax.scatter([], [], s=50, facecolor="white", edgecolor=MUTED, linewidth=2, label="COCO val2017")
     ax.scatter([], [], s=50, color=MUTED, label="KITTI train (zero-shot)")
-    ax.legend(frameon=False, fontsize=8.5, loc="upper right")
+    ax.legend(frameon=False, fontsize=8.5, loc="upper left", bbox_to_anchor=(0.6, 0.47))
     style(ax)
     ax.set_title("Speed vs accuracy, and the drop from COCO to KITTI", fontsize=10.5, color=INK, loc="left")
     fig.tight_layout()
