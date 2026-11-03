@@ -1,6 +1,6 @@
 """Checks for the corrections in scripts/detectors.py. Run before spending GPU time:
 
-  uv run scripts/test_fixes.py            # Faster R-CNN floor + token scoring unit checks (CPU ok)
+  uv run scripts/test_fixes.py            # Faster R-CNN floor, COCO-80 aliases, token scoring checks (CPU ok)
   uv run scripts/test_fixes.py --gdino    # also runs Grounding DINO on a few COCO images
 """
 from __future__ import annotations
@@ -57,6 +57,21 @@ def test_frcnn_floor():
     print(f"faster r-cnn: score_thresh=0.001, {scores.numel()} boxes, min score {scores.min():.4f}")
 
 
+def test_coco80_aliases():
+    # The PekingU/rtdetr_r50vd checkpoint names six COCO classes VOC-style; the
+    # coco80 taxonomy must map every checkpoint name or those detections vanish.
+    from transformers import AutoConfig
+    from eval import make_taxonomy
+    tax = make_taxonomy("coco80")
+    for alias, coco in [("motorbike", "motorcycle"), ("aeroplane", "airplane"), ("sofa", "couch"),
+                        ("pottedplant", "potted plant"), ("diningtable", "dining table"), ("tvmonitor", "tv")]:
+        assert tax.name_to_id(alias) is not None and tax.name_to_id(alias) == tax.name_to_id(coco), alias
+    names = list(AutoConfig.from_pretrained("PekingU/rtdetr_r50vd").id2label.values())
+    unmapped = [n for n in names if tax.name_to_id(n) is None]
+    assert len(names) == 80 and not unmapped, unmapped
+    print("coco80 taxonomy: all 80 RT-DETR checkpoint names map (6 via aliases)")
+
+
 def test_gdino(n=6):
     for name, tax in taxonomies().items():
         det = build("gdino:IDEA-Research/grounding-dino-tiny", tax, device=DEVICE, score_thr=0.001)
@@ -101,6 +116,7 @@ if __name__ == "__main__":
     ap.add_argument("--gdino", action="store_true")
     a = ap.parse_args()
     test_class_probs()
+    test_coco80_aliases()
     test_frcnn_floor()
     if a.gdino:
         test_gdino()

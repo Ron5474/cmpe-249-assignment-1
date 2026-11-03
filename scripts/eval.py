@@ -44,10 +44,24 @@ COCO_ANN = DATA_ROOT / "coco/annotations/instances_val2017.json"
 ROOTS = {"coco": DATA_ROOT / "coco/val2017", "kitti": DATA_ROOT / "kitti"}
 
 
+# PekingU/rtdetr_* checkpoints name six COCO classes VOC-style in `id2label`.
+# Without these aliases the taxonomy lookup returns None and the detections are
+# discarded, which zeroed those six classes in the first RT-DETR COCO-80 run.
+COCO80_ALIASES = {
+    "motorcycle": ["motorbike"],
+    "airplane": ["aeroplane"],
+    "couch": ["sofa"],
+    "potted plant": ["pottedplant"],
+    "dining table": ["diningtable"],
+    "tv": ["tvmonitor"],
+}
+
+
 def make_taxonomy(name: str) -> ngtax.Taxonomy:
     if name == "coco80":
         cats = json.load(open(COCO_ANN))["categories"]
-        return ngtax.Taxonomy.from_synonyms("coco80", {c["name"]: [] for c in cats})
+        return ngtax.Taxonomy.from_synonyms(
+            "coco80", {c["name"]: COCO80_ALIASES.get(c["name"], []) for c in cats})
     if name == "driving3_bare":
         # Same classes/synonyms as driving3, but no curated prompt terms, so
         # open-vocab models are prompted with "vehicle . person . cyclist".
