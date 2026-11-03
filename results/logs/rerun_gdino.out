@@ -1,0 +1,321 @@
+class_probs: mean within term, max within class, ok
+faster r-cnn: score_thresh=0.001, 93 boxes, min score 0.0033
+gdino driving3: 1800 boxes on 6 images, classes [0, 1, 2], min score 0.0091, 6 images with multi-class queries; spans ['car', 'truck', 'bus', 'van', 'person', 'pedestrian', 'bicycle', 'cyclist']
+gdino driving3_bare: 1800 boxes on 6 images, classes [0, 1, 2], min score 0.0069, 6 images with multi-class queries; spans ['vehicle', 'person', 'cyclist']
+all checks passed
++ uv run scripts/compare_gdino_postprocess.py --dataset coco --max-images 500
+loading annotations into memory...
+Done (t=0.46s)
+creating index...
+index created!
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=1.46s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=1.65s).
+Accumulating evaluation results...
+DONE (t=0.32s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.367
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.523
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.398
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.214
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.386
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.500
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.205
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.519
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.613
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.436
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.648
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.691
+ngdet_phrase   mAP=0.367 AR100=0.613 vehicle=0.353 person=0.535 cyclist=0.213
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.00s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.38s).
+Accumulating evaluation results...
+DONE (t=0.05s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.317
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.467
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.341
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.227
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.381
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.345
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.178
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.447
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.482
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.410
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.553
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.426
+phrase_parser  mAP=0.317 AR100=0.482 vehicle=0.425 person=0.295 cyclist=0.229
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.15s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=2.61s).
+Accumulating evaluation results...
+DONE (t=0.69s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.400
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.565
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.436
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.240
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.430
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.540
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.216
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.579
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.724
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.597
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.741
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.804
+token_scoring  mAP=0.400 AR100=0.724 vehicle=0.447 person=0.551 cyclist=0.202
++ uv run scripts/compare_gdino_postprocess.py --dataset kitti --max-images 500
+Warning: Open3D not available. 3D LiDAR visualization will be disabled.
+Warning: Mayavi visualization utils not available. Some 3D visualization features may not work.
+✅ KITTI utilities loaded successfully
+📊 Detected dataset type: standard_split
+📋 Loaded 7481 samples for train split
+📋 Loaded 10 object categories
+🎯 Active classes for training: 8
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=1.30s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=4.21s).
+Accumulating evaluation results...
+DONE (t=0.33s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.179
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.345
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.172
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.128
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.187
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.278
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.116
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.381
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.428
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.419
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.407
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.491
+ngdet_phrase   mAP=0.179 AR100=0.428 vehicle=0.340 person=0.166 cyclist=0.029
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.01s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=1.31s).
+Accumulating evaluation results...
+DONE (t=0.11s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.197
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.371
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.195
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.139
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.210
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.285
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.113
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.361
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.376
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.368
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.356
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.438
+phrase_parser  mAP=0.197 AR100=0.376 vehicle=0.434 person=0.143 cyclist=0.014
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.15s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=4.32s).
+Accumulating evaluation results...
+DONE (t=0.71s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.217
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.410
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.213
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.147
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.230
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.333
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.120
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.478
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.559
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.530
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.536
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.647
+token_scoring  mAP=0.217 AR100=0.559 vehicle=0.440 person=0.170 cyclist=0.041
++ uv run scripts/eval.py --exp driving3 --taxonomy driving3 --max-images 0 --models gdino:IDEA-Research/grounding-dino-tiny --datasets coco kitti
+
+======================================================================
+[gdino:IDEA-Research/grounding-dino-tiny] x [coco] taxonomy=driving3
+======================================================================
+loading annotations into memory...
+Done (t=0.46s)
+creating index...
+index created!
+  0/5000
+  500/5000
+  1000/5000
+  1500/5000
+  2000/5000
+  2500/5000
+  3000/5000
+  3500/5000
+  4000/5000
+  4500/5000
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=4.80s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=27.05s).
+Accumulating evaluation results...
+DONE (t=9.33s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.423
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.587
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.468
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.235
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.462
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.586
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.227
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.579
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.705
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.523
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.729
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.854
+
+======================================================================
+[gdino:IDEA-Research/grounding-dino-tiny] x [kitti] taxonomy=driving3
+======================================================================
+Warning: Open3D not available. 3D LiDAR visualization will be disabled.
+Warning: Mayavi visualization utils not available. Some 3D visualization features may not work.
+✅ KITTI utilities loaded successfully
+📊 Detected dataset type: standard_split
+📋 Loaded 7481 samples for train split
+📋 Loaded 10 object categories
+🎯 Active classes for training: 8
+  0/7481
+  500/7481
+  1000/7481
+  1500/7481
+  2000/7481
+  2500/7481
+  3000/7481
+  3500/7481
+  4000/7481
+  4500/7481
+  5000/7481
+  5500/7481
+  6000/7481
+  6500/7481
+  7000/7481
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=6.89s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=64.40s).
+Accumulating evaluation results...
+DONE (t=16.65s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.219
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.415
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.211
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.130
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.232
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.325
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.115
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.465
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.550
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.527
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.530
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.619
+
+Saved -> /workspace/cmpe-249-assignment-1/results/driving3
++ uv run scripts/eval.py --exp driving3_bare --taxonomy driving3_bare --max-images 0 --models gdino:IDEA-Research/grounding-dino-tiny --datasets kitti
+
+======================================================================
+[gdino:IDEA-Research/grounding-dino-tiny] x [kitti] taxonomy=driving3_bare
+======================================================================
+Warning: Open3D not available. 3D LiDAR visualization will be disabled.
+Warning: Mayavi visualization utils not available. Some 3D visualization features may not work.
+✅ KITTI utilities loaded successfully
+📊 Detected dataset type: standard_split
+📋 Loaded 7481 samples for train split
+📋 Loaded 10 object categories
+🎯 Active classes for training: 8
+  0/7481
+  500/7481
+  1000/7481
+  1500/7481
+  2000/7481
+  2500/7481
+  3000/7481
+  3500/7481
+  4000/7481
+  4500/7481
+  5000/7481
+  5500/7481
+  6000/7481
+  6500/7481
+  7000/7481
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=5.93s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=52.43s).
+Accumulating evaluation results...
+DONE (t=17.30s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.154
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.322
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.128
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.087
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.165
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.251
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.151
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.391
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.517
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.493
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.503
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.566
+
+Saved -> /workspace/cmpe-249-assignment-1/results/driving3_bare
++ uv run scripts/latency.py --models torchvision:fasterrcnn_resnet50_fpn_v2 yolo:yolo11s.pt yolo:yolo11x.pt hf_detr:PekingU/rtdetr_r50vd yolo:yolov8s-worldv2.pt gdino:IDEA-Research/grounding-dino-tiny --accel fp32 fp16
+{'model': 'torchvision:fasterrcnn_resnet50_fpn_v2', 'accel': 'fp32', 'median_ms': 21.04, 'p90_ms': 37.53, 'fps': 47.5, 'peak_gpu_mem_mb': 473.1, 'effective_thresholds': {'score_thr': 0.001, 'roi_heads_score_thresh': 0.001}}
+{'model': 'torchvision:fasterrcnn_resnet50_fpn_v2', 'accel': 'fp16', 'median_ms': 20.22, 'p90_ms': 36.6, 'fps': 49.5, 'peak_gpu_mem_mb': 245.4, 'effective_thresholds': {'score_thr': 0.001, 'roi_heads_score_thresh': 0.001}}
+{'model': 'yolo:yolo11s.pt', 'accel': 'fp32', 'median_ms': 12.75, 'p90_ms': 12.86, 'fps': 78.5, 'peak_gpu_mem_mb': 86.7, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'yolo:yolo11s.pt', 'accel': 'fp16', 'median_ms': 13.32, 'p90_ms': 13.46, 'fps': 75.1, 'peak_gpu_mem_mb': 48.1, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'yolo:yolo11x.pt', 'accel': 'fp32', 'median_ms': 19.41, 'p90_ms': 19.57, 'fps': 51.5, 'peak_gpu_mem_mb': 366.3, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'yolo:yolo11x.pt', 'accel': 'fp16', 'median_ms': 20.1, 'p90_ms': 20.42, 'fps': 49.8, 'peak_gpu_mem_mb': 232.9, 'effective_thresholds': {'score_thr': 0.001}}
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+{'model': 'hf_detr:PekingU/rtdetr_r50vd', 'accel': 'fp32', 'median_ms': 44.51, 'p90_ms': 44.84, 'fps': 22.5, 'peak_gpu_mem_mb': 297.1, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'hf_detr:PekingU/rtdetr_r50vd', 'accel': 'fp16', 'median_ms': 45.81, 'p90_ms': 48.05, 'fps': 21.8, 'peak_gpu_mem_mb': 341.4, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'yolo:yolov8s-worldv2.pt', 'accel': 'fp32', 'median_ms': 14.22, 'p90_ms': 14.67, 'fps': 70.3, 'peak_gpu_mem_mb': 933.3, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'yolo:yolov8s-worldv2.pt', 'accel': 'fp16', 'median_ms': 14.55, 'p90_ms': 14.86, 'fps': 68.7, 'peak_gpu_mem_mb': 887.5, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'gdino:IDEA-Research/grounding-dino-tiny', 'accel': 'fp32', 'median_ms': 125.53, 'p90_ms': 130.44, 'fps': 8.0, 'peak_gpu_mem_mb': 1621.3, 'effective_thresholds': {'score_thr': 0.001, 'gdino_scoring': 'token-to-class, top-300 query-class pairs, no text_threshold'}}
+{'model': 'gdino:IDEA-Research/grounding-dino-tiny', 'accel': 'fp16', 'median_ms': 122.31, 'p90_ms': 125.91, 'fps': 8.2, 'peak_gpu_mem_mb': 1621.3, 'effective_thresholds': {'score_thr': 0.001, 'gdino_scoring': 'token-to-class, top-300 query-class pairs, no text_threshold'}}

@@ -1,0 +1,48 @@
+class_probs: mean within term, max within class, ok
+faster r-cnn: score_thresh=0.001, 93 boxes, min score 0.0036
+all checks passed
++ uv run scripts/eval.py --exp repro_coco80 --taxonomy coco80 --max-images 0 --models hf_detr:PekingU/rtdetr_r50vd --datasets coco
+
+======================================================================
+[hf_detr:PekingU/rtdetr_r50vd] x [coco] taxonomy=coco80
+======================================================================
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+loading annotations into memory...
+Done (t=0.45s)
+creating index...
+index created!
+  0/5000
+  500/5000
+  1000/5000
+  1500/5000
+  2000/5000
+  2500/5000
+  3000/5000
+  3500/5000
+  4000/5000
+  4500/5000
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=8.03s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=82.16s).
+Accumulating evaluation results...
+DONE (t=16.55s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.523
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.702
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.569
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.272
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.505
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.677
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.389
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.652
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.718
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.503
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.720
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.836
+
+Saved -> /home/ron/workspace/github/Ron5474/SJSU/cmpe-249-assignment-1/results/repro_coco80

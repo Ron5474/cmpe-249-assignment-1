@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "scripts/eval.py",
+    "--exp",
+    "driving3_bare",
+    "--taxonomy",
+    "driving3_bare",
+    "--max-images",
+    "0",
+    "--models",
+    "gdino:IDEA-Research/grounding-dino-tiny",
+    "--datasets",
+    "kitti"
+  ],
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_version": "0f9be9f",
+  "run_started": "2026-11-03T01:08:41+0000",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "python": "3.12.15",
+  "platform": "Linux-5.15.0-185-generic-x86_64-with-glibc2.39"
+}

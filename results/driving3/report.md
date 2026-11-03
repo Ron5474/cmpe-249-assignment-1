@@ -6,23 +6,23 @@ Unified taxonomy: **driving3** = `['vehicle', 'person', 'cyclist']`
 
 | model \ dataset | coco | kitti |
 |---|---|---|
-| torchvision:fasterrcnn_resnet50_fpn_v2 | 0.491 | 0.237 |
 | yolo:yolo11s.pt | 0.476 | 0.225 |
 | yolo:yolo11x.pt | 0.558 | 0.240 |
 | hf_detr:PekingU/rtdetr_r50vd | 0.517 | 0.245 |
 | yolo:yolov8s-worldv2.pt | 0.344 | 0.210 |
-| gdino:IDEA-Research/grounding-dino-tiny | 0.389 | 0.181 |
+| torchvision:fasterrcnn_resnet50_fpn_v2 | 0.493 | 0.238 |
+| gdino:IDEA-Research/grounding-dino-tiny | 0.423 | 0.219 |
 
 ## Summary matrix — AP50
 
 | model \ dataset | coco | kitti |
 |---|---|---|
-| torchvision:fasterrcnn_resnet50_fpn_v2 | 0.752 | 0.439 |
 | yolo:yolo11s.pt | 0.693 | 0.429 |
 | yolo:yolo11x.pt | 0.773 | 0.446 |
 | hf_detr:PekingU/rtdetr_r50vd | 0.754 | 0.450 |
 | yolo:yolov8s-worldv2.pt | 0.504 | 0.399 |
-| gdino:IDEA-Research/grounding-dino-tiny | 0.545 | 0.351 |
+| torchvision:fasterrcnn_resnet50_fpn_v2 | 0.755 | 0.442 |
+| gdino:IDEA-Research/grounding-dino-tiny | 0.587 | 0.415 |
 
 ## Generalization gap (COCO mAP − driving-dataset mAP)
 
@@ -30,60 +30,14 @@ Positive = drop when moving from the COCO training domain to a driving domain (h
 
 | model | kitti |
 |---|---|
-| torchvision:fasterrcnn_resnet50_fpn_v2 | +0.255 |
 | yolo:yolo11s.pt | +0.251 |
 | yolo:yolo11x.pt | +0.318 |
 | hf_detr:PekingU/rtdetr_r50vd | +0.272 |
 | yolo:yolov8s-worldv2.pt | +0.134 |
-| gdino:IDEA-Research/grounding-dino-tiny | +0.208 |
+| torchvision:fasterrcnn_resnet50_fpn_v2 | +0.255 |
+| gdino:IDEA-Research/grounding-dino-tiny | +0.204 |
 
 ## Full COCO tables (per run)
-
-### torchvision:fasterrcnn_resnet50_fpn_v2  ×  coco  (5000 imgs, 85.1s, open_vocab=False)
-
-| Metric | Value |
-|---|---|
-| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.491 |
-| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.752 |
-| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.523 |
-| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.286 |
-| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.498 |
-| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.660 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.231 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.553 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.606 |
-| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.438 |
-| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.628 |
-| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.745 |
-
-| Class | AP@[.5:.95] |
-|---|---|
-| vehicle | 0.531 |
-| person | 0.565 |
-| cyclist | 0.378 |
-
-### torchvision:fasterrcnn_resnet50_fpn_v2  ×  kitti  (7481 imgs, 145.0s, open_vocab=False)
-
-| Metric | Value |
-|---|---|
-| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.237 |
-| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.439 |
-| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.234 |
-| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.121 |
-| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.229 |
-| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.315 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.111 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.317 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.342 |
-| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.321 |
-| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.333 |
-| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.380 |
-
-| Class | AP@[.5:.95] |
-|---|---|
-| vehicle | 0.453 |
-| person | 0.255 |
-| cyclist | 0.001 |
 
 ### yolo:yolo11s.pt  ×  coco  (5000 imgs, 46.7s, open_vocab=False)
 
@@ -269,48 +223,94 @@ Positive = drop when moving from the COCO training domain to a driving domain (h
 | person | 0.216 |
 | cyclist | 0.008 |
 
-### gdino:IDEA-Research/grounding-dino-tiny  ×  coco  (5000 imgs, 536.8s, open_vocab=True)
+### torchvision:fasterrcnn_resnet50_fpn_v2  ×  coco  (5000 imgs, 155.8s, open_vocab=False)
 
 | Metric | Value |
 |---|---|
-| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.389 |
-| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.545 |
-| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.428 |
-| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.204 |
-| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.413 |
-| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.553 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.219 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.517 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.607 |
-| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.419 |
-| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.626 |
-| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.767 |
+| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.493 |
+| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.755 |
+| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.524 |
+| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.288 |
+| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.500 |
+| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.662 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.232 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.556 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.620 |
+| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.456 |
+| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.644 |
+| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.754 |
 
 | Class | AP@[.5:.95] |
 |---|---|
-| vehicle | 0.367 |
-| person | 0.524 |
-| cyclist | 0.275 |
+| vehicle | 0.534 |
+| person | 0.566 |
+| cyclist | 0.380 |
 
-### gdino:IDEA-Research/grounding-dino-tiny  ×  kitti  (7481 imgs, 718.5s, open_vocab=True)
+### torchvision:fasterrcnn_resnet50_fpn_v2  ×  kitti  (7481 imgs, 289.0s, open_vocab=False)
 
 | Metric | Value |
 |---|---|
-| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.181 |
-| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.351 |
-| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.170 |
-| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.109 |
-| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.189 |
-| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.275 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.110 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.371 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.424 |
-| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.402 |
-| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.408 |
-| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.484 |
+| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.238 |
+| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.442 |
+| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.235 |
+| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.121 |
+| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.232 |
+| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.320 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.112 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.324 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.364 |
+| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.337 |
+| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.359 |
+| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.400 |
 
 | Class | AP@[.5:.95] |
 |---|---|
-| vehicle | 0.337 |
-| person | 0.186 |
-| cyclist | 0.019 |
+| vehicle | 0.457 |
+| person | 0.256 |
+| cyclist | 0.001 |
+
+### gdino:IDEA-Research/grounding-dino-tiny  ×  coco  (5000 imgs, 718.0s, open_vocab=True)
+
+| Metric | Value |
+|---|---|
+| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.423 |
+| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.587 |
+| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.468 |
+| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.235 |
+| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.462 |
+| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.586 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.227 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.579 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.705 |
+| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.523 |
+| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.729 |
+| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.854 |
+
+| Class | AP@[.5:.95] |
+|---|---|
+| vehicle | 0.473 |
+| person | 0.536 |
+| cyclist | 0.258 |
+
+### gdino:IDEA-Research/grounding-dino-tiny  ×  kitti  (7481 imgs, 947.3s, open_vocab=True)
+
+| Metric | Value |
+|---|---|
+| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.219 |
+| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.415 |
+| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.211 |
+| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.130 |
+| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.232 |
+| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.325 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.115 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.465 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.550 |
+| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.527 |
+| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.530 |
+| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.619 |
+
+| Class | AP@[.5:.95] |
+|---|---|
+| vehicle | 0.439 |
+| person | 0.189 |
+| cyclist | 0.029 |

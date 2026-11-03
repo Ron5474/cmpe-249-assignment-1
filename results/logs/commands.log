@@ -2,3 +2,13 @@
 + uv run scripts/eval.py --exp driving3 --taxonomy driving3 --max-images 0 --models torchvision:fasterrcnn_resnet50_fpn_v2 yolo:yolo11s.pt yolo:yolo11x.pt hf_detr:PekingU/rtdetr_r50vd yolo:yolov8s-worldv2.pt gdino:IDEA-Research/grounding-dino-tiny --datasets coco kitti
 + uv run scripts/eval.py --exp driving3_bare --taxonomy driving3_bare --max-images 0 --models gdino:IDEA-Research/grounding-dino-tiny --datasets kitti
 + uv run scripts/latency.py --models torchvision:fasterrcnn_resnet50_fpn_v2 yolo:yolo11s.pt yolo:yolo11x.pt hf_detr:PekingU/rtdetr_r50vd yolo:yolov8s-worldv2.pt gdino:IDEA-Research/grounding-dino-tiny --accel fp32 fp16
++ uv run scripts/eval.py --exp repro_coco80 --taxonomy coco80 --max-images 0 --models torchvision:fasterrcnn_resnet50_fpn_v2 --datasets coco
++ uv run scripts/eval.py --exp driving3 --taxonomy driving3 --max-images 0 --models torchvision:fasterrcnn_resnet50_fpn_v2 gdino:IDEA-Research/grounding-dino-tiny --datasets coco kitti
++ uv run scripts/eval.py --exp driving3_bare --taxonomy driving3_bare --max-images 0 --models gdino:IDEA-Research/grounding-dino-tiny --datasets kitti
++ uv run scripts/latency.py --models torchvision:fasterrcnn_resnet50_fpn_v2 yolo:yolo11s.pt yolo:yolo11x.pt hf_detr:PekingU/rtdetr_r50vd yolo:yolov8s-worldv2.pt gdino:IDEA-Research/grounding-dino-tiny --accel fp32 fp16
++ uv run scripts/compare_gdino_postprocess.py --dataset coco --max-images 500
++ uv run scripts/compare_gdino_postprocess.py --dataset kitti --max-images 500
++ uv run scripts/eval.py --exp driving3 --taxonomy driving3 --max-images 0 --models gdino:IDEA-Research/grounding-dino-tiny --datasets coco kitti
++ uv run scripts/eval.py --exp driving3_bare --taxonomy driving3_bare --max-images 0 --models gdino:IDEA-Research/grounding-dino-tiny --datasets kitti
++ uv run scripts/latency.py --models torchvision:fasterrcnn_resnet50_fpn_v2 yolo:yolo11s.pt yolo:yolo11x.pt hf_detr:PekingU/rtdetr_r50vd yolo:yolov8s-worldv2.pt gdino:IDEA-Research/grounding-dino-tiny --accel fp32 fp16
++ uv run scripts/eval.py --exp repro_coco80 --taxonomy coco80 --max-images 0 --models hf_detr:PekingU/rtdetr_r50vd --datasets coco

@@ -1,0 +1,15 @@
+{'model': 'torchvision:fasterrcnn_resnet50_fpn_v2', 'accel': 'fp32', 'median_ms': 11.98, 'p90_ms': 12.05, 'fps': 83.5, 'peak_gpu_mem_mb': 473.1}
+{'model': 'torchvision:fasterrcnn_resnet50_fpn_v2', 'accel': 'fp16', 'median_ms': 9.32, 'p90_ms': 9.6, 'fps': 107.3, 'peak_gpu_mem_mb': 245.4}
+{'model': 'yolo:yolo11s.pt', 'accel': 'fp32', 'median_ms': 5.84, 'p90_ms': 6.4, 'fps': 171.3, 'peak_gpu_mem_mb': 86.7}
+{'model': 'yolo:yolo11s.pt', 'accel': 'fp16', 'median_ms': 5.96, 'p90_ms': 6.29, 'fps': 167.9, 'peak_gpu_mem_mb': 83.8}
+{'model': 'yolo:yolo11x.pt', 'accel': 'fp32', 'median_ms': 8.05, 'p90_ms': 8.37, 'fps': 124.3, 'peak_gpu_mem_mb': 420.5}
+{'model': 'yolo:yolo11x.pt', 'accel': 'fp16', 'median_ms': 8.43, 'p90_ms': 8.88, 'fps': 118.7, 'peak_gpu_mem_mb': 283.6}
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+{'model': 'hf_detr:PekingU/rtdetr_r50vd', 'accel': 'fp32', 'median_ms': 16.57, 'p90_ms': 16.65, 'fps': 60.3, 'peak_gpu_mem_mb': 297.9}
+{'model': 'hf_detr:PekingU/rtdetr_r50vd', 'accel': 'fp16', 'median_ms': 16.9, 'p90_ms': 17.45, 'fps': 59.2, 'peak_gpu_mem_mb': 342.6}
+{'model': 'yolo:yolov8s-worldv2.pt', 'accel': 'fp32', 'median_ms': 6.44, 'p90_ms': 7.04, 'fps': 155.4, 'peak_gpu_mem_mb': 935.3}
+{'model': 'yolo:yolov8s-worldv2.pt', 'accel': 'fp16', 'median_ms': 6.7, 'p90_ms': 7.09, 'fps': 149.3, 'peak_gpu_mem_mb': 937.9}
+/workspace/cmpe-249-assignment-1/.venv/lib/python3.12/site-packages/transformers/models/grounding_dino/processing_grounding_dino.py:99: FutureWarning: The key `labels` is will return integer ids in `GroundingDinoProcessor.post_process_grounded_object_detection` output since v4.51.0. Use `text_labels` instead to retrieve string object names.
+  warnings.warn(self.message, FutureWarning)
+{'model': 'gdino:IDEA-Research/grounding-dino-tiny', 'accel': 'fp32', 'median_ms': 81.76, 'p90_ms': 82.27, 'fps': 12.2, 'peak_gpu_mem_mb': 1621.2}
+{'model': 'gdino:IDEA-Research/grounding-dino-tiny', 'accel': 'fp16', 'median_ms': 79.55, 'p90_ms': 79.93, 'fps': 12.6, 'peak_gpu_mem_mb': 1622.2}

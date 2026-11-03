@@ -6,19 +6,19 @@ Unified taxonomy: **coco80** = `['person', 'bicycle', 'car', 'motorcycle', 'airp
 
 | model \ dataset | coco |
 |---|---|
-| torchvision:fasterrcnn_resnet50_fpn_v2 | 0.459 |
 | yolo:yolo11s.pt | 0.450 |
 | yolo:yolo11x.pt | 0.529 |
-| hf_detr:PekingU/rtdetr_r50vd | 0.482 |
+| torchvision:fasterrcnn_resnet50_fpn_v2 | 0.462 |
+| hf_detr:PekingU/rtdetr_r50vd | 0.523 |
 
 ## Summary matrix — AP50
 
 | model \ dataset | coco |
 |---|---|
-| torchvision:fasterrcnn_resnet50_fpn_v2 | 0.663 |
 | yolo:yolo11s.pt | 0.613 |
 | yolo:yolo11x.pt | 0.692 |
-| hf_detr:PekingU/rtdetr_r50vd | 0.648 |
+| torchvision:fasterrcnn_resnet50_fpn_v2 | 0.667 |
+| hf_detr:PekingU/rtdetr_r50vd | 0.702 |
 
 ## Generalization gap (COCO mAP − driving-dataset mAP)
 
@@ -26,112 +26,12 @@ Positive = drop when moving from the COCO training domain to a driving domain (h
 
 | model |  |
 |---|
-| torchvision:fasterrcnn_resnet50_fpn_v2 |  |
 | yolo:yolo11s.pt |  |
 | yolo:yolo11x.pt |  |
+| torchvision:fasterrcnn_resnet50_fpn_v2 |  |
 | hf_detr:PekingU/rtdetr_r50vd |  |
 
 ## Full COCO tables (per run)
-
-### torchvision:fasterrcnn_resnet50_fpn_v2  ×  coco  (5000 imgs, 94.4s, open_vocab=False)
-
-| Metric | Value |
-|---|---|
-| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.459 |
-| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.663 |
-| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.503 |
-| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.242 |
-| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.448 |
-| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.587 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.365 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.577 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.606 |
-| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.409 |
-| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.608 |
-| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.706 |
-
-| Class | AP@[.5:.95] |
-|---|---|
-| person | 0.565 |
-| bicycle | 0.378 |
-| car | 0.486 |
-| motorcycle | 0.491 |
-| airplane | 0.684 |
-| bus | 0.705 |
-| train | 0.687 |
-| truck | 0.423 |
-| boat | 0.313 |
-| traffic light | 0.310 |
-| fire hydrant | 0.696 |
-| stop sign | 0.701 |
-| parking meter | 0.470 |
-| bench | 0.303 |
-| bird | 0.371 |
-| cat | 0.719 |
-| dog | 0.664 |
-| horse | 0.637 |
-| sheep | 0.528 |
-| cow | 0.585 |
-| elephant | 0.643 |
-| bear | 0.691 |
-| zebra | 0.690 |
-| giraffe | 0.695 |
-| backpack | 0.201 |
-| umbrella | 0.438 |
-| handbag | 0.203 |
-| tie | 0.390 |
-| suitcase | 0.446 |
-| frisbee | 0.690 |
-| skis | 0.294 |
-| snowboard | 0.450 |
-| sports ball | 0.502 |
-| kite | 0.419 |
-| baseball bat | 0.376 |
-| baseball glove | 0.433 |
-| skateboard | 0.584 |
-| surfboard | 0.434 |
-| tennis racket | 0.577 |
-| bottle | 0.423 |
-| wine glass | 0.400 |
-| cup | 0.476 |
-| fork | 0.431 |
-| knife | 0.271 |
-| spoon | 0.252 |
-| bowl | 0.461 |
-| banana | 0.255 |
-| apple | 0.236 |
-| sandwich | 0.390 |
-| orange | 0.343 |
-| broccoli | 0.227 |
-| carrot | 0.197 |
-| hot dog | 0.357 |
-| pizza | 0.538 |
-| donut | 0.456 |
-| cake | 0.366 |
-| chair | 0.329 |
-| couch | 0.455 |
-| potted plant | 0.313 |
-| bed | 0.419 |
-| dining table | 0.299 |
-| toilet | 0.637 |
-| tv | 0.582 |
-| laptop | 0.649 |
-| mouse | 0.666 |
-| remote | 0.399 |
-| keyboard | 0.562 |
-| cell phone | 0.428 |
-| microwave | 0.613 |
-| oven | 0.387 |
-| toaster | 0.564 |
-| sink | 0.430 |
-| refrigerator | 0.605 |
-| book | 0.151 |
-| clock | 0.545 |
-| vase | 0.410 |
-| scissors | 0.363 |
-| teddy bear | 0.516 |
-| hair drier | 0.118 |
-| toothbrush | 0.355 |
 
 ### yolo:yolo11s.pt  ×  coco  (5000 imgs, 61.8s, open_vocab=False)
 
@@ -333,48 +233,148 @@ Positive = drop when moving from the COCO training domain to a driving domain (h
 | hair drier | 0.227 |
 | toothbrush | 0.462 |
 
-### hf_detr:PekingU/rtdetr_r50vd  ×  coco  (5000 imgs, 136.4s, open_vocab=False)
+### torchvision:fasterrcnn_resnet50_fpn_v2  ×  coco  (5000 imgs, 192.2s, open_vocab=False)
 
 | Metric | Value |
 |---|---|
-| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.482 |
-| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.648 |
-| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.525 |
-| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.254 |
-| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.473 |
-| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.629 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.355 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.598 |
-| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.661 |
-| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.472 |
-| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.670 |
-| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.772 |
+| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.462 |
+| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.667 |
+| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.505 |
+| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.244 |
+| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.451 |
+| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.590 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.368 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.592 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.626 |
+| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.436 |
+| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.635 |
+| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.726 |
 
 | Class | AP@[.5:.95] |
 |---|---|
-| person | 0.593 |
+| person | 0.566 |
+| bicycle | 0.380 |
+| car | 0.488 |
+| motorcycle | 0.493 |
+| airplane | 0.686 |
+| bus | 0.707 |
+| train | 0.688 |
+| truck | 0.426 |
+| boat | 0.314 |
+| traffic light | 0.312 |
+| fire hydrant | 0.701 |
+| stop sign | 0.706 |
+| parking meter | 0.476 |
+| bench | 0.304 |
+| bird | 0.373 |
+| cat | 0.721 |
+| dog | 0.668 |
+| horse | 0.639 |
+| sheep | 0.530 |
+| cow | 0.589 |
+| elephant | 0.646 |
+| bear | 0.698 |
+| zebra | 0.693 |
+| giraffe | 0.700 |
+| backpack | 0.203 |
+| umbrella | 0.439 |
+| handbag | 0.205 |
+| tie | 0.391 |
+| suitcase | 0.449 |
+| frisbee | 0.690 |
+| skis | 0.296 |
+| snowboard | 0.451 |
+| sports ball | 0.504 |
+| kite | 0.422 |
+| baseball bat | 0.382 |
+| baseball glove | 0.436 |
+| skateboard | 0.585 |
+| surfboard | 0.438 |
+| tennis racket | 0.580 |
+| bottle | 0.426 |
+| wine glass | 0.402 |
+| cup | 0.478 |
+| fork | 0.433 |
+| knife | 0.272 |
+| spoon | 0.254 |
+| bowl | 0.463 |
+| banana | 0.256 |
+| apple | 0.237 |
+| sandwich | 0.393 |
+| orange | 0.345 |
+| broccoli | 0.228 |
+| carrot | 0.199 |
+| hot dog | 0.362 |
+| pizza | 0.541 |
+| donut | 0.456 |
+| cake | 0.369 |
+| chair | 0.330 |
+| couch | 0.457 |
+| potted plant | 0.315 |
+| bed | 0.422 |
+| dining table | 0.300 |
+| toilet | 0.641 |
+| tv | 0.584 |
+| laptop | 0.650 |
+| mouse | 0.668 |
+| remote | 0.403 |
+| keyboard | 0.566 |
+| cell phone | 0.428 |
+| microwave | 0.614 |
+| oven | 0.388 |
+| toaster | 0.564 |
+| sink | 0.432 |
+| refrigerator | 0.606 |
+| book | 0.152 |
+| clock | 0.547 |
+| vase | 0.412 |
+| scissors | 0.365 |
+| teddy bear | 0.517 |
+| hair drier | 0.119 |
+| toothbrush | 0.355 |
+
+### hf_detr:PekingU/rtdetr_r50vd  ×  coco  (5000 imgs, 1061.6s, open_vocab=False)
+
+| Metric | Value |
+|---|---|
+| AP  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.523 |
+| AP  @[IoU=0.50      | area=   all | maxDets=100] | 0.702 |
+| AP  @[IoU=0.75      | area=   all | maxDets=100] | 0.569 |
+| AP  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.272 |
+| AP  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.505 |
+| AP  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.677 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=  1] | 0.389 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets= 10] | 0.652 |
+| AR  @[IoU=0.50:0.95 | area=   all | maxDets=100] | 0.718 |
+| AR  @[IoU=0.50:0.95 | area= small | maxDets=100] | 0.503 |
+| AR  @[IoU=0.50:0.95 | area=medium | maxDets=100] | 0.720 |
+| AR  @[IoU=0.50:0.95 | area= large | maxDets=100] | 0.836 |
+
+| Class | AP@[.5:.95] |
+|---|---|
+| person | 0.594 |
 | bicycle | 0.395 |
 | car | 0.500 |
-| motorcycle | 0.000 |
-| airplane | 0.000 |
+| motorcycle | 0.542 |
+| airplane | 0.769 |
 | bus | 0.759 |
 | train | 0.762 |
 | truck | 0.457 |
 | boat | 0.354 |
-| traffic light | 0.325 |
+| traffic light | 0.324 |
 | fire hydrant | 0.756 |
 | stop sign | 0.705 |
 | parking meter | 0.531 |
 | bench | 0.331 |
 | bird | 0.436 |
 | cat | 0.817 |
-| dog | 0.757 |
+| dog | 0.756 |
 | horse | 0.691 |
 | sheep | 0.628 |
 | cow | 0.643 |
 | elephant | 0.714 |
 | bear | 0.848 |
-| zebra | 0.783 |
+| zebra | 0.782 |
 | giraffe | 0.765 |
 | backpack | 0.213 |
 | umbrella | 0.506 |
@@ -386,49 +386,49 @@ Positive = drop when moving from the COCO training domain to a driving domain (h
 | snowboard | 0.480 |
 | sports ball | 0.523 |
 | kite | 0.523 |
-| baseball bat | 0.500 |
+| baseball bat | 0.499 |
 | baseball glove | 0.433 |
-| skateboard | 0.629 |
+| skateboard | 0.628 |
 | surfboard | 0.528 |
 | tennis racket | 0.600 |
 | bottle | 0.454 |
-| wine glass | 0.442 |
+| wine glass | 0.447 |
 | cup | 0.510 |
 | fork | 0.535 |
 | knife | 0.327 |
 | spoon | 0.333 |
 | bowl | 0.503 |
-| banana | 0.301 |
+| banana | 0.300 |
 | apple | 0.275 |
 | sandwich | 0.508 |
-| orange | 0.380 |
-| broccoli | 0.282 |
+| orange | 0.379 |
+| broccoli | 0.281 |
 | carrot | 0.282 |
-| hot dog | 0.520 |
+| hot dog | 0.521 |
 | pizza | 0.619 |
 | donut | 0.549 |
 | cake | 0.439 |
 | chair | 0.386 |
-| couch | 0.000 |
-| potted plant | 0.000 |
+| couch | 0.549 |
+| potted plant | 0.361 |
 | bed | 0.564 |
-| dining table | 0.000 |
+| dining table | 0.390 |
 | toilet | 0.716 |
-| tv | 0.000 |
+| tv | 0.653 |
 | laptop | 0.723 |
 | mouse | 0.676 |
-| remote | 0.461 |
+| remote | 0.462 |
 | keyboard | 0.622 |
 | cell phone | 0.471 |
-| microwave | 0.699 |
+| microwave | 0.698 |
 | oven | 0.461 |
 | toaster | 0.619 |
-| sink | 0.473 |
+| sink | 0.472 |
 | refrigerator | 0.707 |
 | book | 0.182 |
 | clock | 0.577 |
-| vase | 0.445 |
+| vase | 0.444 |
 | scissors | 0.435 |
 | teddy bear | 0.615 |
-| hair drier | 0.244 |
+| hair drier | 0.243 |
 | toothbrush | 0.425 |

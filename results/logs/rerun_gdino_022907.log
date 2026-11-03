@@ -1,0 +1,13 @@
+{'model': 'torchvision:fasterrcnn_resnet50_fpn_v2', 'accel': 'fp32', 'median_ms': 21.04, 'p90_ms': 37.53, 'fps': 47.5, 'peak_gpu_mem_mb': 473.1, 'effective_thresholds': {'score_thr': 0.001, 'roi_heads_score_thresh': 0.001}}
+{'model': 'torchvision:fasterrcnn_resnet50_fpn_v2', 'accel': 'fp16', 'median_ms': 20.22, 'p90_ms': 36.6, 'fps': 49.5, 'peak_gpu_mem_mb': 245.4, 'effective_thresholds': {'score_thr': 0.001, 'roi_heads_score_thresh': 0.001}}
+{'model': 'yolo:yolo11s.pt', 'accel': 'fp32', 'median_ms': 12.75, 'p90_ms': 12.86, 'fps': 78.5, 'peak_gpu_mem_mb': 86.7, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'yolo:yolo11s.pt', 'accel': 'fp16', 'median_ms': 13.32, 'p90_ms': 13.46, 'fps': 75.1, 'peak_gpu_mem_mb': 48.1, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'yolo:yolo11x.pt', 'accel': 'fp32', 'median_ms': 19.41, 'p90_ms': 19.57, 'fps': 51.5, 'peak_gpu_mem_mb': 366.3, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'yolo:yolo11x.pt', 'accel': 'fp16', 'median_ms': 20.1, 'p90_ms': 20.42, 'fps': 49.8, 'peak_gpu_mem_mb': 232.9, 'effective_thresholds': {'score_thr': 0.001}}
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+{'model': 'hf_detr:PekingU/rtdetr_r50vd', 'accel': 'fp32', 'median_ms': 44.51, 'p90_ms': 44.84, 'fps': 22.5, 'peak_gpu_mem_mb': 297.1, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'hf_detr:PekingU/rtdetr_r50vd', 'accel': 'fp16', 'median_ms': 45.81, 'p90_ms': 48.05, 'fps': 21.8, 'peak_gpu_mem_mb': 341.4, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'yolo:yolov8s-worldv2.pt', 'accel': 'fp32', 'median_ms': 14.22, 'p90_ms': 14.67, 'fps': 70.3, 'peak_gpu_mem_mb': 933.3, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'yolo:yolov8s-worldv2.pt', 'accel': 'fp16', 'median_ms': 14.55, 'p90_ms': 14.86, 'fps': 68.7, 'peak_gpu_mem_mb': 887.5, 'effective_thresholds': {'score_thr': 0.001}}
+{'model': 'gdino:IDEA-Research/grounding-dino-tiny', 'accel': 'fp32', 'median_ms': 125.53, 'p90_ms': 130.44, 'fps': 8.0, 'peak_gpu_mem_mb': 1621.3, 'effective_thresholds': {'score_thr': 0.001, 'gdino_scoring': 'token-to-class, top-300 query-class pairs, no text_threshold'}}
+{'model': 'gdino:IDEA-Research/grounding-dino-tiny', 'accel': 'fp16', 'median_ms': 122.31, 'p90_ms': 125.91, 'fps': 8.2, 'peak_gpu_mem_mb': 1621.3, 'effective_thresholds': {'score_thr': 0.001, 'gdino_scoring': 'token-to-class, top-300 query-class pairs, no text_threshold'}}

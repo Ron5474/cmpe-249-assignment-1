@@ -1,0 +1,53 @@
+
+======================================================================
+[gdino:IDEA-Research/grounding-dino-tiny] x [kitti] taxonomy=driving3_bare
+======================================================================
+Warning: Open3D not available. 3D LiDAR visualization will be disabled.
+Warning: Mayavi visualization utils not available. Some 3D visualization features may not work.
+✅ KITTI utilities loaded successfully
+📊 Detected dataset type: standard_split
+📋 Loaded 7481 samples for train split
+📋 Loaded 10 object categories
+🎯 Active classes for training: 8
+/workspace/cmpe-249-assignment-1/.venv/lib/python3.12/site-packages/transformers/models/grounding_dino/processing_grounding_dino.py:99: FutureWarning: The key `labels` is will return integer ids in `GroundingDinoProcessor.post_process_grounded_object_detection` output since v4.51.0. Use `text_labels` instead to retrieve string object names.
+  warnings.warn(self.message, FutureWarning)
+  0/7481
+  500/7481
+  1000/7481
+  1500/7481
+  2000/7481
+  2500/7481
+  3000/7481
+  3500/7481
+  4000/7481
+  4500/7481
+  5000/7481
+  5500/7481
+  6000/7481
+  6500/7481
+  7000/7481
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=9.19s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=26.24s).
+Accumulating evaluation results...
+DONE (t=3.47s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.140
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.284
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.119
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.063
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.157
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.259
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.136
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.288
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.399
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.338
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.393
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.475
+
+Saved -> /workspace/cmpe-249-assignment-1/results/driving3_bare

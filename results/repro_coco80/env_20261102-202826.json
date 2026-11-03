@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "scripts/eval.py",
+    "--exp",
+    "repro_coco80",
+    "--taxonomy",
+    "coco80",
+    "--max-images",
+    "0",
+    "--models",
+    "hf_detr:PekingU/rtdetr_r50vd",
+    "--datasets",
+    "coco"
+  ],
+  "gpu": "NVIDIA RTX A2000 Laptop GPU",
+  "code_version": "51dad16-dirty",
+  "run_started": "2026-11-02T20:10:37-0800",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "python": "3.12.3",
+  "platform": "Linux-6.6.87.1-microsoft-standard-WSL2-x86_64-with-glibc2.39"
+}
