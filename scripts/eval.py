@@ -16,6 +16,7 @@ Usage (see scripts/run_all.sh for the exact commands used in the report):
 from __future__ import annotations
 
 import argparse
+import gc
 import gzip
 import json
 import os
@@ -36,7 +37,7 @@ from DeepDataMiningLearning.ngdet.datasets import EvalDataset  # noqa: E402
 from DeepDataMiningLearning.ngdet.evaluator import COCOUnifiedEvaluator  # noqa: E402
 from DeepDataMiningLearning.ngdet.report import plot_heatmap, write_markdown_report  # noqa: E402
 
-from detectors import build  # noqa: E402
+from detectors import build, effective_thresholds  # noqa: E402
 
 DATA_ROOT = Path(os.environ.get("DATA_ROOT", REPO / "data"))
 COCO_ANN = DATA_ROOT / "coco/annotations/instances_val2017.json"
@@ -107,6 +108,7 @@ def evaluate_one(spec: str, ds_name: str, tax, score_thr: float, max_images,
         "model": label, "dataset": ds_name, "taxonomy": tax.name,
         "num_images": n, "open_vocab": detector.is_open_vocab,
         "score_thr": detector.score_thr,
+        "effective_thresholds": effective_thresholds(detector),
         "prompt": getattr(detector, "text_prompt", None),
         "seconds": round(time.time() - t0, 1),
         "mean_predict_ms": round(1000 * infer_s / max(n, 1), 2),
@@ -114,6 +116,7 @@ def evaluate_one(spec: str, ds_name: str, tax, score_thr: float, max_images,
         **RUN_INFO,
     }
     del detector
+    gc.collect()  # HF detectors hold internal reference cycles; free before the next peak-memory reading
     torch.cuda.empty_cache()
     return metrics
 

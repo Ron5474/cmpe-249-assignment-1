@@ -10,6 +10,7 @@ measurement, hence this script.
 from __future__ import annotations
 
 import argparse
+import gc
 import json
 import os
 import statistics
@@ -25,7 +26,7 @@ from PIL import Image  # noqa: E402
 
 from DeepDataMiningLearning.ngdet.taxonomy import Taxonomy  # noqa: E402
 
-from detectors import build  # noqa: E402
+from detectors import build, effective_thresholds  # noqa: E402
 from eval import RUN_INFO  # noqa: E402
 
 DATA_ROOT = Path(os.environ.get("DATA_ROOT", REPO / "data"))
@@ -67,10 +68,12 @@ def main():
                 "p90_ms": round(sorted(times)[int(0.9 * len(times))], 2),
                 "fps": round(1000 / statistics.median(times), 1),
                 "peak_gpu_mem_mb": round(torch.cuda.max_memory_allocated() / 2**20, 1),
+                "effective_thresholds": effective_thresholds(det),
             }
             print(row, flush=True)
             rows.append(row)
             del det
+            gc.collect()  # HF detectors hold internal reference cycles; free before the next peak-memory reading
 
     out = REPO / "results" / "latency"
     out.mkdir(parents=True, exist_ok=True)

@@ -45,6 +45,17 @@ def phrase_to_class(phrase, taxonomy) -> Optional[int]:
     return ids.pop()
 
 
+def effective_thresholds(det) -> dict:
+    """Score floors actually in force for a built detector (for result metadata)."""
+    out = {"score_thr": det.score_thr}
+    model = getattr(getattr(det, "model", None), "_orig_mod", getattr(det, "model", None))
+    if hasattr(model, "roi_heads"):
+        out["roi_heads_score_thresh"] = model.roi_heads.score_thresh
+    if hasattr(det, "text_threshold"):
+        out["text_threshold"] = det.text_threshold
+    return out
+
+
 def build(spec: str, taxonomy, device: str = "cuda", score_thr: float = 0.001, accel: str = "fp32"):
     det = build_detector(spec, taxonomy, device=device, score_thr=score_thr, accel=accel)
     key = spec.split(":", 1)[0]
@@ -52,5 +63,6 @@ def build(spec: str, taxonomy, device: str = "cuda", score_thr: float = 0.001, a
         model = getattr(det.model, "_orig_mod", det.model)  # unwrap torch.compile
         model.roi_heads.score_thresh = min(model.roi_heads.score_thresh, det.score_thr)
     if key == "gdino":
-        det._label_to_unified = lambda text: phrase_to_class(text, det.taxonomy)
+        # bind the taxonomy, not det, so the detector is not kept alive by a reference cycle
+        det._label_to_unified = lambda text, tax=det.taxonomy: phrase_to_class(text, tax)
     return det
